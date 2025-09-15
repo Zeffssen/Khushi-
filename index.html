@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khushi ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      overflow: hidden;
+    }
+
+    /* Floating hearts background */
+    .heart {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 20px;
+      animation: floatUp 10s infinite;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: #ffe;
+    }
+
+    button {
+      background: #ff4b7d;
+      color: white;
+      font-size: 1.2em;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 6px 15px rgba(255,75,125,0.5);
+    }
+
+    button:hover {
+      background: #ff3366;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <div class="heart" style="left:10%; animation-duration:12s;">❤️</div>
+  <div class="heart" style="left:30%; animation-duration:8s;">💖</div>
+  <div class="heart" style="left:50%; animation-duration:14s;">💕</div>
+  <div class="heart" style="left:70%; animation-duration:10s;">💓</div>
+  <div class="heart" style="left:90%; animation-duration:9s;">💗</div>
+
+  <div class="container">
+    <h1>Hi Khushi ❤️</h1>
+    <p>Ready for unlimited love notes all day long?</p>
+    <button id="startBtn">Start Love Spam 💌</button>
+  </div>
+
+  <script>
+    const compliments = [
+      "You are my sunshine ☀️",
+      "Cutest smile ever 😍",
+      "Every day with you is special ✨",
+      "You’re the reason I’m happy 💕",
+      "The most beautiful girl in the world 💖",
+      "I love you more than words 😘",
+      "You make everything better 🌸",
+      "You’re my forever person ❤️",
+      "My heart belongs to you 💓",
+      "You’re perfect to me 🌹",
+      "I miss you every second ⏳",
+      "You’re the best thing in my life ✨",
+      "I can’t stop thinking of you 🥺",
+      "With you, I feel complete 💞",
+      "Khushi, you’re my favorite word 💌",
+      "My love for you grows every day 🌱",
+      "You’re the prettiest soul 💎",
+      "I’m lucky to have you 🍀",
+      "Your eyes are my galaxy 🌌",
+      "You make my heart race 💓"
+      // 👉 Add as many as you want!
+    ];
+
+    function showNotification(msg) {
+      if (Notification.permission === "granted") {
+        new Notification("Hey Khushi ❤️", {
+          body: msg,
+          icon: "https://i.imgur.com/u7Xj4c9.png"
+        });
+      }
+    }
+
+    function randomCompliment() {
+      return compliments[Math.floor(Math.random() * compliments.length)];
+    }
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            showNotification(randomCompliment());
+            // Every 5 minutes (change to 60000 for 1 min)
+            setInterval(() => {
+              showNotification(randomCompliment());
+            }, 300000);
+          }
+        });
+      } else {
+        alert("Notifications not supported.");
+      }
+    });
+  </script>
+</body>
+</html>
