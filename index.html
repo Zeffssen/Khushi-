@@ -3,63 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khushi's Magical Love Garden 🌸</title>
+<title>Khushi's Dreamy Night Sky 🌌</title>
 <style>
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to top, #ffe6f0, #fffaf0);
     overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #1a1a40 100%);
     height: 100vh;
     cursor: pointer;
   }
 
-  h1 {
-    text-align: center;
-    color: #ff6f91;
-    margin-top: 20px;
-  }
-
-  #garden {
-    position: relative;
+  #sky {
     width: 100%;
     height: 100%;
+    position: relative;
   }
 
-  .flower, .heart, .butterfly {
+  .star {
     position: absolute;
-    user-select: none;
-    pointer-events: none;
-    animation: floatUp 5s linear forwards;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    box-shadow: 0 0 10px white;
+    transition: transform 0.3s, opacity 0.3s;
   }
 
-  @keyframes floatUp {
-    0% { transform: translateY(0) scale(0); opacity: 0; }
-    50% { opacity: 1; scale:1; }
-    100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+  .star.big {
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4;
   }
 
-  #secretLetter {
+  #loveLetter {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff0f5;
+    background: rgba(255, 240, 245, 0.95);
     padding: 30px;
     border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
     text-align: center;
-    box-shadow: 0 0 30px rgba(255, 111, 145, 0.5);
     display: none;
-    color: #ff69b4;
+    color: #ff1493;
     font-size: 20px;
   }
 
-  #secretLetter button {
+  #loveLetter button {
     margin-top: 15px;
     padding: 10px 20px;
     border-radius: 50px;
     border: none;
-    background: #ffb6c1;
+    background: #ff69b4;
     color: white;
     cursor: pointer;
   }
@@ -67,62 +65,85 @@
 </head>
 <body>
 
-<h1>Welcome to Khushi's Magical Love Garden 🌸</h1>
-<div id="garden"></div>
+<h1 style="text-align:center; color:#ff69b4; margin-top:20px;">Khushi's Dreamy Night Sky 🌌</h1>
+<div id="sky"></div>
 
-<div id="secretLetter">
-  <p>💌 Surprise! Khushi, you are my everything 💖</p>
-  <button onclick="closeLetter()">Close 🌸</button>
+<div id="loveLetter">
+  <p>💌 Khushi, you are my brightest star in the night sky 🌟 I love you endlessly 💖</p>
+  <button onclick="closeLetter()">Close 🌙</button>
 </div>
 
 <script>
-  const garden = document.getElementById('garden');
-  const secretLetter = document.getElementById('secretLetter');
+  const sky = document.getElementById('sky');
+  const loveLetter = document.getElementById('loveLetter');
 
+  // Random compliments/messages for stars
   const messages = [
-    "You make my heart flutter 💓",
-    "Khushi, you are magical ✨",
+    "You light up my life 💖",
+    "Khushi, you're magical ✨",
     "Your smile is my favorite 😍",
-    "I love you more every day 💖",
-    "You are my sunshine ☀️",
+    "I love you more every day 💌",
+    "You are my dream come true 🌙",
     "Being with you feels like home 🏡",
-    "You are my dream come true 🌸",
-    "I can't stop thinking about you 💌"
+    "You are my happiness 🌟",
+    "I can't stop thinking about you 💓"
   ];
 
-  // Function to create flowers/hearts/butterflies
-  function bloomLove(x, y) {
-    const types = ['🌸', '💖', '🦋'];
-    const icon = types[Math.floor(Math.random() * types.length)];
-    const span = document.createElement('div');
-    span.textContent = icon;
-    span.style.left = x + 'px';
-    span.style.top = y + 'px';
-    span.classList.add(icon === '🦋' ? 'butterfly' : icon === '💖' ? 'heart' : 'flower');
-    garden.appendChild(span);
-    setTimeout(() => span.remove(), 5000);
+  // Generate random stars
+  const stars = [];
+  for(let i=0; i<100; i++){
+    const star = document.createElement('div');
+    star.classList.add('star');
+    if(Math.random() < 0.05) star.classList.add('big'); // a few big stars
+    star.style.top = Math.random()*window.innerHeight + 'px';
+    star.style.left = Math.random()*window.innerWidth + 'px';
+    sky.appendChild(star);
+    stars.push(star);
 
-    // Show random message sometimes
-    if (Math.random() < 0.3) {
-      const msg = messages[Math.floor(Math.random() * messages.length)];
+    // Add click event to show message
+    star.addEventListener('click', () => {
+      star.style.transform = 'scale(1.5)';
+      star.style.opacity = 0.5;
+      setTimeout(() => {
+        star.style.transform = 'scale(1)';
+        star.style.opacity = 0.8;
+      }, 500);
+
+      const msg = messages[Math.floor(Math.random()*messages.length)];
       alert(msg);
+
+      // If it's a big star, show full love letter
+      if(star.classList.contains('big')){
+        loveLetter.style.display = 'block';
+      }
+    });
+  }
+
+  // Shooting stars
+  function shootingStar(){
+    const star = document.createElement('div');
+    star.classList.add('star','big');
+    star.style.top = Math.random()*window.innerHeight*0.5 + 'px';
+    star.style.left = '-50px';
+    star.style.transition = 'all 2s linear';
+    sky.appendChild(star);
+    setTimeout(() => {
+      star.style.left = window.innerWidth + 'px';
+      star.style.top = Math.random()*window.innerHeight*0.5 + 'px';
+    },50);
+    setTimeout(()=> star.remove(), 2000);
+
+    // Optional: show random compliment
+    if(Math.random()<0.5){
+      const msg = messages[Math.floor(Math.random()*messages.length)];
+      setTimeout(()=> alert(msg), 500);
     }
   }
 
-  // Click event for garden
-  document.body.addEventListener('click', (e) => {
-    bloomLove(e.clientX, e.clientY);
+  setInterval(shootingStar, 5000);
 
-    // Secret letter spot (hidden treasure)
-    if (e.clientX > window.innerWidth/2 - 50 && e.clientX < window.innerWidth/2 + 50 &&
-        e.clientY > window.innerHeight/2 - 50 && e.clientY < window.innerHeight/2 + 50) {
-      secretLetter.style.display = 'block';
-    }
-  });
+  function closeLetter(){ loveLetter.style.display='none'; }
 
-  function closeLetter() {
-    secretLetter.style.display = 'none';
-  }
 </script>
 
 </body>
