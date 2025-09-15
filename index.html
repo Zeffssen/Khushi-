@@ -1,141 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khushi ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Khushi 💖</title>
+<style>
+  /* General Styles */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+    overflow-x: hidden;
+  }
 
-    /* Floating hearts background */
-    .heart {
-      position: absolute;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 20px;
-      animation: floatUp 10s infinite;
-    }
+  h1, h2, h3 {
+    color: #ff6f91;
+    text-align: center;
+  }
 
-    @keyframes floatUp {
-      from { transform: translateY(100vh); opacity: 1; }
-      to { transform: translateY(-10vh); opacity: 0; }
-    }
+  /* Hearts Animation */
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    color: #ff6f91;
+    animation: floatUp 5s linear infinite;
+  }
 
-    .container {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-      z-index: 2;
-    }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+  }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      color: #fff;
-    }
+  /* Timeline Section */
+  .timeline {
+    max-width: 600px;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 111, 145, 0.3);
+  }
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-      color: #ffe;
-    }
+  .event {
+    margin: 15px 0;
+    padding-left: 15px;
+    border-left: 3px solid #ff6f91;
+    position: relative;
+  }
 
-    button {
-      background: #ff4b7d;
-      color: white;
-      font-size: 1.2em;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 6px 15px rgba(255,75,125,0.5);
-    }
+  .event::before {
+    content: "💖";
+    position: absolute;
+    left: -25px;
+    top: -3px;
+  }
 
-    button:hover {
-      background: #ff3366;
-      transform: scale(1.05);
-    }
-  </style>
+  /* Button Styles */
+  .button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    background: #ffb6c1;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .button:hover {
+    transform: scale(1.1);
+  }
+
+  /* Compliment Box */
+  #complimentBox {
+    max-width: 400px;
+    margin: 20px auto;
+    background: #fff0f5;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 111, 145, 0.3);
+    text-align: center;
+    font-size: 20px;
+    color: #ff69b4;
+  }
+</style>
 </head>
 <body>
-  <!-- Floating hearts -->
-  <div class="heart" style="left:10%; animation-duration:12s;">❤️</div>
-  <div class="heart" style="left:30%; animation-duration:8s;">💖</div>
-  <div class="heart" style="left:50%; animation-duration:14s;">💕</div>
-  <div class="heart" style="left:70%; animation-duration:10s;">💓</div>
-  <div class="heart" style="left:90%; animation-duration:9s;">💗</div>
 
-  <div class="container">
-    <h1>Hi Khushi ❤️</h1>
-    <p>Ready for unlimited love notes all day long?</p>
-    <button id="startBtn">Start Love Spam 💌</button>
-  </div>
+<h1>Hi Khushi! 💖</h1>
+<h3>This is just for you 🥰</h3>
 
-  <script>
-    const compliments = [
-      "You are my sunshine ☀️",
-      "Cutest smile ever 😍",
-      "Every day with you is special ✨",
-      "You’re the reason I’m happy 💕",
-      "The most beautiful girl in the world 💖",
-      "I love you more than words 😘",
-      "You make everything better 🌸",
-      "You’re my forever person ❤️",
-      "My heart belongs to you 💓",
-      "You’re perfect to me 🌹",
-      "I miss you every second ⏳",
-      "You’re the best thing in my life ✨",
-      "I can’t stop thinking of you 🥺",
-      "With you, I feel complete 💞",
-      "Khushi, you’re my favorite word 💌",
-      "My love for you grows every day 🌱",
-      "You’re the prettiest soul 💎",
-      "I’m lucky to have you 🍀",
-      "Your eyes are my galaxy 🌌",
-      "You make my heart race 💓"
-      // 👉 Add as many as you want!
-    ];
+<div class="timeline">
+  <h2>Our Story</h2>
+  <div class="event">We met for the first time 💕</div>
+  <div class="event">First chat we had 😄</div>
+  <div class="event">Our relationship began 🥰</div>
+  <div class="event">Today: 5 amazing days together! 💖</div>
+</div>
 
-    function showNotification(msg) {
-      if (Notification.permission === "granted") {
-        new Notification("Hey Khushi ❤️", {
-          body: msg,
-          icon: "https://i.imgur.com/u7Xj4c9.png"
-        });
-      }
+<button class="button" onclick="showCompliment()">Click for a Surprise 💌</button>
+<div id="complimentBox">You are amazing! 🌸</div>
+
+<script>
+  // Compliments Array
+  const compliments = [
+    "Khushi, you light up my world 🌞",
+    "You are my everything 💖",
+    "Your smile is my favorite 😍",
+    "Every moment with you is magical ✨",
+    "You are beautiful inside and out 🌸",
+    "I can't stop thinking about you 💌",
+    "Khushi, you make my heart skip a beat 💓",
+    "You are my sunshine on rainy days ☀️",
+    "Being with you feels like home 🏡",
+    "I love you more every single day 💕"
+  ];
+
+  // Show Compliment
+  function showCompliment() {
+    const box = document.getElementById('complimentBox');
+    const random = compliments[Math.floor(Math.random() * compliments.length)];
+    box.textContent = random;
+
+    // Notification
+    if (Notification.permission === "granted") {
+      new Notification(random);
     }
+  }
 
-    function randomCompliment() {
-      return compliments[Math.floor(Math.random() * compliments.length)];
-    }
+  // Ask for Notification Permission
+  if (Notification.permission !== "granted") {
+    Notification.requestPermission();
+  }
 
-    document.getElementById("startBtn").addEventListener("click", () => {
-      if ("Notification" in window) {
-        Notification.requestPermission().then(permission => {
-          if (permission === "granted") {
-            showNotification(randomCompliment());
-            // Every 5 minutes (change to 60000 for 1 min)
-            setInterval(() => {
-              showNotification(randomCompliment());
-            }, 300000);
-          }
-        });
-      } else {
-        alert("Notifications not supported.");
-      }
-    });
-  </script>
+  // Floating Hearts
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+    heart.textContent = '💖';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+
+  setInterval(createHeart, 500);
+</script>
+
 </body>
 </html>
