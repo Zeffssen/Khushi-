@@ -1,150 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khushi's Dreamy Night Sky 🌌</title>
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #1a1a40 100%);
-    height: 100vh;
-    cursor: pointer;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Khushi 💜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  #sky {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #f8e8ff 25%, #e8d5ff 50%, #d5c5ff 75%, #c5b5ff 100%);
+            min-height: 300vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-  .star {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    box-shadow: 0 0 10px white;
-    transition: transform 0.3s, opacity 0.3s;
-  }
+        .floating-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+            font-size: 20px;
+            animation: float-up linear infinite;
+        }
 
-  .star.big {
-    width: 12px;
-    height: 12px;
-    box-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4;
-  }
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-  #loveLetter {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 240, 245, 0.95);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
-    text-align: center;
-    display: none;
-    color: #ff1493;
-    font-size: 20px;
-  }
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+        }
 
-  #loveLetter button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: none;
-    background: #ff69b4;
-    color: white;
-    cursor: pointer;
-  }
-</style>
+        .countdown-box {
+            background: linear-gradient(145deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(255, 154, 158, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            animation: anniversary-glow 3s ease-in-out infinite alternate;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: countdown-shimmer 4s linear infinite;
+        }
+
+        @keyframes anniversary-glow {
+            0% { 
+                box-shadow: 0 20px 40px rgba(255, 154, 158, 0.4);
+                transform: scale(1);
+            }
+            100% { 
+                box-shadow: 0 25px 50px rgba(255, 154, 158, 0.6), 0 0 30px rgba(255, 154, 158, 0.3);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes countdown-shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .countdown-title {
+            color: #be185d;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-display {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            min-width: 70px;
+            backdrop-filter: blur(10px);
+        }
+
+        .time-number {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #be185d;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-label {
+            font-size: 12px;
+            color: #be185d;
+            font-weight: 600;
+        }
+
+        .anniversary-message {
+            color: #be185d;
+            font-size: 14px;
+            text-align: center;
+            font-weight: 500;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message-box {
+            background: linear-gradient(145deg, #e6d3ff, #d1b3ff);
+            border-radius: 25px;
+            padding: 25px 35px;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(156, 108, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .message-box:hover::before {
+            animation: shimmer 0.6s ease;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .message-box:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 25px 50px rgba(156, 108, 255, 0.4);
+            background: linear-gradient(145deg, #f0e6ff, #e6d3ff);
+        }
+
+        .message-text {
+            color: #6b46c1;
+            font-size: 16px;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .surprise-box {
+            background: linear-gradient(145deg, #ffd6f0, #ffb3e6);
+            border-radius: 20px;
+            padding: 20px 30px;
+            max-width: 350px;
+            box-shadow: 0 12px 25px rgba(255, 102, 204, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .surprise-box:hover {
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 102, 204, 0.4);
+            background: linear-gradient(145deg, #ffe6f7, #ffd6f0);
+        }
+
+        .surprise-text {
+            color: #be185d;
+            font-size: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #f8e8ff, #e8d5ff);
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            animation: modalAppear 0.5s ease;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.7) translateY(-50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-text {
+            color: #6b46c1;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .close {
+            background: linear-gradient(145deg, #d1b3ff, #b399ff);
+            color: white;
+            float: none;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 25px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: linear-gradient(145deg, #b399ff, #9980ff);
+            transform: scale(1.05);
+        }
+
+        .staggered-left {
+            align-self: flex-start;
+            margin-left: 10%;
+        }
+
+        .staggered-right {
+            align-self: flex-end;
+            margin-right: 10%;
+        }
+
+        .staggered-center {
+            align-self: center;
+        }
+
+        @media (max-width: 768px) {
+            .message-container {
+                padding: 30px 15px;
+                gap: 40px;
+            }
+            
+            .message-box, .surprise-box, .countdown-box {
+                max-width: 90%;
+            }
+            
+            .modal-content {
+                margin: 20% auto;
+                padding: 25px;
+                width: 95%;
+            }
+            
+            .staggered-left, .staggered-right {
+                align-self: center;
+                margin: 0;
+            }
+        }
+
+        .special-glow {
+            animation: gentle-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentle-glow {
+            0% { box-shadow: 0 15px 35px rgba(156, 108, 255, 0.3); }
+            100% { box-shadow: 0 15px 35px rgba(156, 108, 255, 0.6), 0 0 20px rgba(156, 108, 255, 0.4); }
+        }
+
+        .heart-pulse {
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
 </head>
 <body>
+    <div class="message-container">
+        <!-- COUNTDOWN TIMER - This should be visible at the top -->
+        <div class="countdown-box staggered-center">
+            <div class="countdown-title">💕 Total days, minutes, and seconds remaining until 1 year of our relationship 💕</div>
+            <div class="countdown-display">
+                <div class="time-unit">
+                    <span class="time-number" id="days">0</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="hours">0</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="minutes">0</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="seconds">0</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+            <div class="anniversary-message">Since you said yes on September 11th at 2:02 PM <span class="heart-pulse">💜</span></div>
+        </div>
 
-<h1 style="text-align:center; color:#ff69b4; margin-top:20px;">Khushi's Dreamy Night Sky 🌌</h1>
-<div id="sky"></div>
+        <div class="message-box staggered-center special-glow" onclick="showModal('Every moment chatting with you makes me smile 😊 Your messages light up my entire day and fill my heart with so much joy!')">
+            <div class="message-text">💬 Our Chat Moments <span class="heart-pulse">💜</span></div>
+        </div>
 
-<div id="loveLetter">
-  <p>💌 Khushi, you are my brightest star in the night sky 🌟 I love you endlessly 💖</p>
-  <button onclick="closeLetter()">Close 🌙</button>
-</div>
+        <div class="surprise-box staggered-left" onclick="showModal('I love our little talks more than words can express 💕 Every conversation with you feels like discovering a new piece of happiness!')">
+            <div class="surprise-text">✨ Surprise Message ✨</div>
+        </div>
 
-<script>
-  const sky = document.getElementById('sky');
-  const loveLetter = document.getElementById('loveLetter');
+        <div class="message-box staggered-right" onclick="showModal('Talking to you is my favorite part of the day 🌟 I find myself smiling just thinking about our conversations!')">
+            <div class="message-text">🌸 Daily Favorite 🌸</div>
+        </div>
 
-  // Random compliments/messages for stars
-  const messages = [
-    "You light up my life 💖",
-    "Khushi, you're magical ✨",
-    "Your smile is my favorite 😍",
-    "I love you more every day 💌",
-    "You are my dream come true 🌙",
-    "Being with you feels like home 🏡",
-    "You are my happiness 🌟",
-    "I can't stop thinking about you 💓"
-  ];
+        <div class="message-box staggered-center" onclick="showModal('Your laugh in our calls is the most beautiful sound in the world 🎵 It makes everything better instantly!')">
+            <div class="message-text">🎶 Beautiful Sounds <span class="heart-pulse">💖</span></div>
+        </div>
 
-  // Generate random stars
-  const stars = [];
-  for(let i=0; i<100; i++){
-    const star = document.createElement('div');
-    star.classList.add('star');
-    if(Math.random() < 0.05) star.classList.add('big'); // a few big stars
-    star.style.top = Math.random()*window.innerHeight + 'px';
-    star.style.left = Math.random()*window.innerWidth + 'px';
-    sky.appendChild(star);
-    stars.push(star);
+        <div class="surprise-box staggered-right" onclick="showModal('Every good morning text from you makes my day brighter ☀️ You have this magical way of making everything feel perfect!')">
+            <div class="surprise-text">🌅 Morning Magic 🌅</div>
+        </div>
 
-    // Add click event to show message
-    star.addEventListener('click', () => {
-      star.style.transform = 'scale(1.5)';
-      star.style.opacity = 0.5;
-      setTimeout(() => {
-        star.style.transform = 'scale(1)';
-        star.style.opacity = 0.8;
-      }, 500);
+        <div class="message-box staggered-left" onclick="showModal('I love how we can talk for hours and it feels like minutes ⏰ Time stops when I am with you!')">
+            <div class="message-text">⏳ Timeless Talks ⏳</div>
+        </div>
 
-      const msg = messages[Math.floor(Math.random()*messages.length)];
-      alert(msg);
+        <div class="message-box staggered-center special-glow" onclick="showModal('Your voice is my favorite melody 🎼 I could listen to you talk about anything and everything forever!')">
+            <div class="message-text">🎵 Sweet Melody <span class="heart-pulse">💜</span></div>
+        </div>
 
-      // If it's a big star, show full love letter
-      if(star.classList.contains('big')){
-        loveLetter.style.display = 'block';
-      }
-    });
-  }
+        <div class="surprise-box staggered-left" onclick="showModal('The way you say my name gives me butterflies every single time 🦋 It is like music to my ears!')">
+            <div class="surprise-text">🦋 Butterfly Moments 🦋</div>
+        </div>
 
-  // Shooting stars
-  function shootingStar(){
-    const star = document.createElement('div');
-    star.classList.add('star','big');
-    star.style.top = Math.random()*window.innerHeight*0.5 + 'px';
-    star.style.left = '-50px';
-    star.style.transition = 'all 2s linear';
-    sky.appendChild(star);
-    setTimeout(() => {
-      star.style.left = window.innerWidth + 'px';
-      star.style.top = Math.random()*window.innerHeight*0.5 + 'px';
-    },50);
-    setTimeout(()=> star.remove(), 2000);
+        <div class="message-box staggered-right" onclick="showModal('I love our inside jokes and the way we make each other laugh 😂 You understand my humor like no one else!')">
+            <div class="message-text">😄 Our Jokes 😄</div>
+        </div>
 
-    // Optional: show random compliment
-    if(Math.random()<0.5){
-      const msg = messages[Math.floor(Math.random()*messages.length)];
-      setTimeout(()=> alert(msg), 500);
-    }
-  }
+        <div class="message-box staggered-center" onclick="showModal('Every goodnight wish from you makes me dream of beautiful things 🌙 You are always my last and first thought!')">
+            <div class="message-text">🌙 Sweet Dreams <span class="heart-pulse">💖</span></div>
+        </div>
 
-  setInterval(shootingStar, 5000);
+        <div class="surprise-box staggered-right" onclick="showModal('I love how comfortable we are in our silences too 🤗 Even quiet moments with you feel so warm and perfect!')">
+            <div class="surprise-text">🤗 Comfortable Silences 🤗</div>
+        </div>
 
-  function closeLetter(){ loveLetter.style.display='none'; }
+        <div class="message-box staggered-left" onclick="showModal('Your texts always come at the perfect time ⏰ It is like you have a superpower to know exactly when I need to hear from you!')">
+            <div class="message-text">🔮 Perfect Timing 🔮</div>
+        </div>
 
-</script>
+        <div class="message-box staggered-center special-glow" onclick="showModal('I love sharing my thoughts with you because you always listen with your whole heart 💕 You make me feel so understood!')">
+            <div class="message-text">👂 Heart Listener <span class="heart-pulse">💜</span></div>
+        </div>
 
+        <div class="surprise-box staggered-left" onclick="showModal('The way you remember little details about what I say melts my heart 🫠 You make me feel so special and loved!')">
+            <div class="surprise-text">💭 Memory Keeper 💭</div>
+        </div>
+
+        <div class="message-box staggered-right" onclick="showModal('Our late-night conversations are pure magic ✨ There is something so intimate about talking when the world is asleep!')">
+            <div class="message-text">🌃 Midnight Magic 🌃</div>
+        </div>
+
+        <div class="message-box staggered-center" onclick="showModal('I love how we can be silly together and just be ourselves 🤪 You bring out the best and most fun parts of me!')">
+            <div class="message-text">🤪 Silly Together <span class="heart-pulse">💖</span></div>
+        </div>
+
+        <div class="surprise-box staggered-right" onclick="showModal('Every photo you share brightens my day instantly 📸 Your smile is my sunshine on cloudy days!')">
+            <div class="surprise-text">📸 Sunshine Smile 📸</div>
+        </div>
+
+        <div class="message-box staggered-left" onclick="showModal('I love how supportive you are in all our conversations 🤝 You always know exactly what to say to make me feel better!')">
+            <div class="message-text">🤝 Always Supportive 🤝</div>
+        </div>
+
+        <div class="message-box staggered-center special-glow" onclick="showModal('The way you care about my day and ask about everything shows how much you love me 💝 I feel so cherished!')">
+            <div class="message-text">💝 Daily Care <span class="heart-pulse">💜</span></div>
+        </div>
+
+        <div class="surprise-box staggered-left" onclick="showModal('I love our future plans and dreams we share together 🌈 Talking about tomorrow with you makes me so excited for life!')">
+            <div class="surprise-text">🌈 Future Dreams 🌈</div>
+        </div>
+
+        <div class="message-box staggered-right" onclick="showModal('Your encouragement gives me strength to face anything 💪 You believe in me even when I do not believe in myself!')">
+            <div class="message-text">💪 My Strength 💪</div>
+        </div>
+
+        <div class="message-box staggered-center" onclick="showModal('Every I love you feels like the first time you said it 💕 My heart still skips a beat every single time!')">
+            <div class="message-text">💕 First Time Feeling <span class="heart-pulse">💖</span></div>
+        </div>
+
+        <div class="surprise-box staggered-right" onclick="showModal('The way you make me laugh until my cheeks hurt is pure joy 😂 You have the most amazing sense of humor!')">
+            <div class="surprise-text">😂 Cheek-Hurting Laughs 😂</div>
+        </div>
+
+        <div class="message-box staggered-left" onclick="showModal('I love how we can talk about deep things and silly things equally 🌊 You understand every part of my soul!')">
+            <div class="message-text">🌊 Deep & Silly 🌊</div>
+        </div>
+
+        <div class="message-box staggered-center special-glow" onclick="showModal('Thank you for being my best friend, my love, and my everything 👑 You make life so incredibly beautiful, Khushi!')">
+            <div class="message-text">👑 My Everything <span class="heart-pulse">💜</span></div>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-text" id="modalText"></div>
+            <button class="close" onclick="closeModal()">Close 💜</button>
+        </div>
+    </div>
+
+    <script>
+        // Countdown timer function
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const currentYear = new Date().getFullYear();
+            
+            // Create target date for this year's anniversary
+            let targetDate = new Date(`September 11, ${currentYear} 14:02:00`).getTime();
+            
+            // If this year's anniversary has passed, calculate for next year
+            if (now > targetDate) {
+                targetDate = new Date(`September 11, ${currentYear + 1} 14:02:00`).getTime();
+            }
+            
+            const distance = targetDate - now;
+            
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Update the display
+                const daysElement = document.getElementById('days');
+                const hoursElement = document.getElementById('hours');
+                const minutesElement = document.getElementById('minutes');
+                const secondsElement = document.getElementById('seconds');
+                
+                if (daysElement) daysElement.textContent = days;
+                if (hoursElement) hoursElement.textContent = hours;
+                if (minutesElement) minutesElement.textContent = minutes;
+                if (secondsElement) secondsElement.textContent = seconds;
+            }
+        }
+
+        // Floating elements data
+        const floatingElements = ['⭐', '🌙', '🦋', '✨', '🍬', '💜', '💖', '🌸', '🌟', '💫', '🪐', '🎀'];
+        
+        // Create floating elements
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.innerHTML = floatingElements[Math.floor(Math.random() * floatingElements.length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            element.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(element);
+            
+            // Remove element after animation
+            setTimeout(() => {
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+            }, 20000);
+        }
+
+        // Create floating elements continuously
+        setInterval(createFloatingElement, 800);
+
+        // Modal functions
+        function showModal(message) {
+            const modalText = document.getElementById('modalText');
+            const modal = document.getElementById('messageModal');
+            if (modalText) modalText.innerHTML = message;
+            if (modal) modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('messageModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('messageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            console.log('Page loaded - starting countdown');
+            
+            // Start countdown immediately
+            updateCountdown();
+            
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+            
+            // Add some initial floating elements
+            for (let i = 0; i < 5; i++) {
+                setTimeout(createFloatingElement, i * 500);
+            }
+            
+            console.log('Countdown initialized');
+        });
+
+        // Add subtle background animation
+        document.body.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 2 - 1;
+            const y = (e.clientY / window.innerHeight) * 2 - 1;
+            
+            document.body.style.backgroundPosition = 
+                `${50 + x * 5}% ${50 + y * 5}%`;
+        });
+    </script>
 </body>
 </html>
